@@ -4,7 +4,7 @@ description: Audita e melhora o SEO do catálogo de uma loja Denaryx pelo servid
 license: MIT
 metadata:
   author: denaryx
-  version: '0.1.0'
+  version: '0.1.1'
 ---
 
 # SEO do catálogo na Denaryx

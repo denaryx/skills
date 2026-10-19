@@ -1,10 +1,10 @@
 ---
 name: denaryx-medicao-e-anuncios
-description: Explica como uma loja Denaryx mede visitas e vendas e alimenta campanhas: os eventos do dataLayer no formato do GA4, a compra enviada pelo servidor para GA4, Meta e TikTok, como não contar a mesma compra duas vezes, e o feed de produtos do Google Shopping. Use quando o usuário configura Google Tag Manager, GA4, Google Ads, Meta Ads ou TikTok Ads para uma loja Denaryx, quando um agente de anúncios precisa do catálogo ou das conversões da loja, ou quando as compras aparecem em dobro ou faltando.
+description: Explica como uma loja Denaryx mede visitas e vendas e alimenta campanhas, com os eventos do dataLayer no formato do GA4, a compra enviada pelo servidor para GA4, Meta e TikTok, como não contar a mesma compra duas vezes, e o feed de produtos do Google Shopping. Use quando o usuário configura Google Tag Manager, GA4, Google Ads, Meta Ads ou TikTok Ads para uma loja Denaryx, quando um agente de anúncios precisa do catálogo ou das conversões da loja, ou quando as compras aparecem em dobro ou faltando.
 license: MIT
 metadata:
   author: denaryx
-  version: "0.1.0"
+  version: '0.1.1'
 ---
 
 # Medição e anúncios numa loja Denaryx
