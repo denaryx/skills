@@ -1,0 +1,15 @@
+{
+  "name": "denaryx",
+  "description": "As skills da Denaryx para agentes de IA.",
+  "owner": {
+    "name": "Denaryx",
+    "url": "https://denaryx.com"
+  },
+  "plugins": [
+    {
+      "name": "denaryx",
+      "source": "./",
+      "description": "Skills para agentes que operam lojas na Denaryx: conectar ao servidor MCP, SEO do catálogo, categorias e páginas, medição e anúncios, temas em Liquid."
+    }
+  ]
+}
