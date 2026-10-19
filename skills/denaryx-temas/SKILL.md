@@ -4,7 +4,7 @@ description: Desenvolve temas em Liquid para lojas Denaryx com o CLI denaryx (te
 license: MIT
 metadata:
   author: denaryx
-  version: '0.1.1'
+  version: '0.2.0'
 ---
 
 # Temas em Liquid na Denaryx

@@ -1,10 +1,10 @@
 ---
 name: denaryx-medicao-e-anuncios
-description: Explica como uma loja Denaryx mede visitas e vendas e alimenta campanhas, com os eventos do dataLayer no formato do GA4, a compra enviada pelo servidor para GA4, Meta e TikTok, como não contar a mesma compra duas vezes, e o feed de produtos do Google Shopping. Use quando o usuário configura Google Tag Manager, GA4, Google Ads, Meta Ads ou TikTok Ads para uma loja Denaryx, quando um agente de anúncios precisa do catálogo ou das conversões da loja, ou quando as compras aparecem em dobro ou faltando.
+description: Explica como uma loja Denaryx mede visitas e vendas e alimenta campanhas, com os eventos do dataLayer no formato do GA4, a compra enviada pelo servidor para GA4, Meta e TikTok, como não contar a mesma compra duas vezes, o feed de produtos do Google Shopping e o relatório de vendas do servidor MCP (get_sales_report) para comparar a receita da loja com a das campanhas. Use quando o usuário configura Google Tag Manager, GA4, Google Ads, Meta Ads ou TikTok Ads para uma loja Denaryx, quando um agente de anúncios precisa do catálogo, das conversões ou das vendas por dia, produto ou categoria da loja, ou quando as compras aparecem em dobro ou faltando.
 license: MIT
 metadata:
   author: denaryx
-  version: '0.1.1'
+  version: '0.2.0'
 ---
 
 # Medição e anúncios numa loja Denaryx
@@ -51,8 +51,20 @@ A mesma compra pode chegar por mais de um caminho. Para não contar duas vezes:
 
 Cada loja publica o feed do Google Shopping em `https://<endereço da loja>/feeds/google.xml`: RSS 2.0 com os campos `g:`, um item por variante (`item_group_id` é o produto), com preço e promoção, disponibilidade, marca, GTIN, condição e o caminho da categoria. O título e a descrição do feed vêm do produto: melhorar esses textos (skill `denaryx-seo-do-catalogo`) também melhora os anúncios.
 
-## O que o servidor MCP ainda não faz
+## As vendas da loja pelo servidor MCP (`get_sales_report`)
 
-O servidor MCP da Denaryx ainda não tem relatório de vendas nem lê pedidos: um agente de IA manda o que lê ao provedor do modelo, e o servidor fica sem dados pessoais. Para conversões, use o que as próprias ferramentas recebem (GA4, Meta, TikTok). Para o catálogo, use o feed.
+Com o escopo `read_reports`, a ferramenta `get_sales_report` soma as vendas de um período, e por dia, por produto ou por coleção (categoria). É o número da loja para comparar com o que a campanha gastou e com o que a ferramenta de anúncios atribui. Não traz nenhum dado de quem comprou.
 
-O guia completo do `dataLayer`, com os campos de cada evento e como testar, está em https://denaryx.com/desenvolvedores/medicao/datalayer.
+```json
+{ "from": "2026-09-01", "to": "2026-09-30", "group_by": "day" }
+```
+
+- **O que conta:** o pedido pago e não cancelado, pela data do pagamento, nos dias de Brasília (`America/Sao_Paulo`). Se a conta de anúncios usa outro fuso, os dias não batem exatamente nas bordas: compare semanas ou meses.
+- **A receita** (`revenue`) é o valor dos produtos com os descontos e sem o frete, o mesmo valor da compra que a loja manda à Meta, ao TikTok e ao GA4, no mesmo momento (o pagamento aprovado). `revenue` dividido pelo que se gastou em todos os canais dá o retorno geral da loja.
+- **Atribuída e total não são a mesma coisa:** o relatório conta todas as vendas da loja, de qualquer canal; a ferramenta de anúncios conta só as que atribui à campanha. O total da loja costuma ser maior. O pedido cancelado depois sai do relatório, mas a conversão continua na ferramenta.
+- **Os campos:** `orders`, `items`, `revenue`, `average_order_value` (o ticket médio), `discount` (cupom e Pix) e `shipping` (o frete), todos em centavos. `totals` é o período inteiro.
+- **Por dia** (`group_by: "day"`): uma linha por dia, com zero nos dias sem venda. Até 92 dias por chamada.
+- **Por produto ou por coleção** (`"product"`, `"collection"`): as que mais venderam em receita, 20 por padrão (até 50 com `limit`; `truncated: true` diz que há mais), num período de até 366 dias. Aqui a receita é a dos itens, antes do cupom e do desconto no Pix. A coleção soma as coleções de baixo dela, e o produto em duas coleções conta nas duas: as linhas não somam o total. Use para saber quais produtos e categorias anunciar, e os títulos e endereços deles com `search_products` e `list_collections` (essas pedem `read_content` ou `read_products`).
+- **Sem dado pessoal:** não peça `read_orders` ao lojista para ver os pedidos um a um. O servidor MCP não lê pedidos nem clientes, e as conversões por pessoa ficam nas ferramentas de anúncios, que já as recebem.
+
+O guia do relatório, com cada campo, está em https://denaryx.com/desenvolvedores/recursos/relatorios. O guia completo do `dataLayer`, com os campos de cada evento e como testar, está em https://denaryx.com/desenvolvedores/medicao/datalayer.

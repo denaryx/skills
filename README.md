@@ -6,13 +6,13 @@ As skills seguem o formato aberto [Agent Skills](https://agentskills.io): uma pa
 
 ## As skills
 
-| Skill                          | Para quê                                                                                         |
-| ------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `denaryx-conectar`             | Ligar o agente ao servidor MCP da loja com o token de uma integração e escolher os escopos.      |
-| `denaryx-seo-do-catalogo`      | Auditar e melhorar títulos, descrições, SEO e o texto das fotos, com simulação, lote e desfazer. |
-| `denaryx-categorias-e-paginas` | Escrever o texto das categorias e das marcas e criar ou revisar as páginas institucionais.       |
-| `denaryx-medicao-e-anuncios`   | Os eventos do dataLayer, a compra pelo servidor, como não medir em dobro e o feed de produtos.   |
-| `denaryx-temas`                | Desenvolver temas em Liquid com o CLI `denaryx` e as convenções da plataforma.                   |
+| Skill                          | Para quê                                                                                              |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `denaryx-conectar`             | Ligar o agente ao servidor MCP da loja com o token de uma integração e escolher os escopos.           |
+| `denaryx-seo-do-catalogo`      | Auditar e melhorar títulos, descrições, SEO e o texto das fotos, com simulação, lote e desfazer.      |
+| `denaryx-categorias-e-paginas` | Escrever o texto das categorias e das marcas e criar ou revisar as páginas institucionais.            |
+| `denaryx-medicao-e-anuncios`   | Os eventos do dataLayer, a compra pelo servidor, o feed e o relatório de vendas (`get_sales_report`). |
+| `denaryx-temas`                | Desenvolver temas em Liquid com o CLI `denaryx` e as convenções da plataforma.                        |
 
 ## Instalar
 

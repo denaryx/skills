@@ -4,7 +4,7 @@ description: Escreve e organiza o conteúdo das páginas de categoria, das marca
 license: MIT
 metadata:
   author: denaryx
-  version: '0.1.1'
+  version: '0.2.0'
 ---
 
 # Categorias, marcas e páginas institucionais na Denaryx
