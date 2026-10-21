@@ -4,7 +4,7 @@ description: Audita e melhora o SEO do catálogo de uma loja Denaryx pelo servid
 license: MIT
 metadata:
   author: denaryx
-  version: '0.2.0'
+  version: '0.2.1'
 ---
 
 # SEO do catálogo na Denaryx
@@ -56,7 +56,7 @@ Este é o trabalho de um agente de SEO numa loja Denaryx: medir o que falta, esc
 ## As regras da plataforma
 
 - **Tamanhos:** `seo.title` grava até 70 caracteres e `seo.description` até 320, mas o Google mostra cerca de 60 e 160: mire nesses. O `alt` da foto vai até 125 caracteres.
-- **Formato da descrição:** o Markdown pequeno da vitrine, com negrito, itálico, links, listas e títulos. **Sem HTML**: ele é recusado.
+- **Formato do texto:** a descrição do produto e a da marca são **texto simples**: a linha em branco separa os parágrafos, e um `**negrito**` aparece na loja com os asteriscos. Só o texto da categoria e o da página usam o Markdown pequeno da vitrine (negrito, itálico, links, listas e títulos). **HTML não vira tag em lugar nenhum**: a vitrine mostra `<b>` como texto, então não use.
 - **O `<head>` é da plataforma:** o canônico, os dados estruturados (produto, loja, trilha), o Open Graph e o `robots` já saem em toda página. Não escreva nada disso nas descrições.
 - **Endereço (`handle`):** mudar o endereço cria sozinho um redirecionamento 301 do antigo para o novo, e a posição no Google não se perde. Mesmo assim, só mude com motivo (por exemplo, um endereço sem sentido como `produto-123`) e com o acordo do usuário. O endereço em uso por outro recurso é recusado com `duplicate_handle`.
 - **Título do produto (`title`):** ele aparece na vitrine, no carrinho, nos e-mails e no feed do Google Shopping. Para melhorar a busca, prefira o `seo.title`. Mude o `title` só com o acordo do usuário.

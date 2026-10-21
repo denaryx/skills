@@ -4,7 +4,7 @@ description: Liga um agente de IA a uma loja da Denaryx pelo servidor MCP (https
 license: MIT
 metadata:
   author: denaryx
-  version: '0.2.0'
+  version: '0.2.1'
 ---
 
 # Conectar um agente à loja Denaryx
@@ -57,7 +57,7 @@ Se o cliente aceita variáveis de ambiente no arquivo, use uma no lugar do token
 
 ## 3. Confira com `get_shop`
 
-A primeira chamada é sempre `get_shop`. Ela devolve a loja (nome, endereço da vitrine, moeda), a integração e os escopos do token. A lista de ferramentas mostra só as que esses escopos permitem.
+A primeira chamada é sempre `get_shop`. Ela devolve a loja (nome, endereço da vitrine, moeda), a integração e os escopos do token. A lista de ferramentas mostra só as que esses escopos permitem. O cliente recebe essa lista quando se conecta: se o lojista marcar um escopo novo depois, o `get_shop` já mostra o escopo, mas a ferramenta só aparece depois de reconectar o servidor (no Claude Code, `/mcp`) ou de abrir outra conversa.
 
 ## Quando dá erro
 

@@ -4,7 +4,7 @@ description: Escreve e organiza o conteúdo das páginas de categoria, das marca
 license: MIT
 metadata:
   author: denaryx
-  version: '0.2.0'
+  version: '0.2.1'
 ---
 
 # Categorias, marcas e páginas institucionais na Denaryx
@@ -23,7 +23,7 @@ O `description` aparece na página da categoria, junto da lista de produtos. Um 
 
 - explica o que a categoria reúne e como escolher (tipos, tamanhos, usos), em 2 a 4 parágrafos curtos;
 - usa os termos que o comprador busca, sem repetir a mesma palavra;
-- pode ter um título, uma lista e links para subcategorias, no Markdown pequeno da vitrine (negrito, itálico, links, listas e títulos; sem HTML);
+- pode ter um título, uma lista e links para subcategorias, no Markdown pequeno da vitrine (negrito, itálico, links, listas e títulos; o HTML aparece como texto, então não use);
 - não cita preço nem promoção, que mudam.
 
 O `seo.title` e o `seo.description` seguem as regras da skill `denaryx-seo-do-catalogo`.
@@ -31,7 +31,7 @@ O `seo.title` e o `seo.description` seguem as regras da skill `denaryx-seo-do-ca
 ## Marcas
 
 - `list_brands` e `get_brand` leem as marcas.
-- `update_brand_content` muda o nome, o `handle`, a descrição e o `seo`.
+- `update_brand_content` muda o nome, o `handle`, a descrição e o `seo`. A descrição da marca é texto simples, sem Markdown: a linha em branco separa os parágrafos.
 
 A descrição da marca aparece na página `/marcas/<handle>`. Conte o que a marca é e por que a loja a vende. Não invente história, prêmio ou origem que não estejam nos dados ou que o usuário não tenha confirmado.
 

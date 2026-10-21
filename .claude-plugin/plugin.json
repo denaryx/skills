@@ -1,6 +1,6 @@
 {
   "name": "denaryx",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Skills para agentes que operam lojas na Denaryx: conectar ao servidor MCP, SEO do catálogo, categorias e páginas, medição e anúncios, temas em Liquid.",
   "author": {
     "name": "Denaryx",
