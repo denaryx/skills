@@ -4,7 +4,7 @@ description: Liga um agente de IA a uma loja da Denaryx pelo servidor MCP (https
 license: MIT
 metadata:
   author: denaryx
-  version: '0.2.2'
+  version: '0.3.0'
 ---
 
 # Conectar um agente à loja Denaryx
@@ -17,7 +17,8 @@ O token vem do painel da loja, e só o dono ou o gerente o criam. Peça ao usuá
 
 1. Abra **Configurações › Integrações** no painel da loja e crie uma integração com um nome que diga quem vai usá-la (por exemplo, "Agente de SEO").
 2. Marque só os escopos de que o agente precisa (tabela abaixo).
-3. Copie o token, que começa com `dnxa_` e aparece uma vez só.
+3. Escolha como as mudanças de texto chegam à loja: **direto** ou **como sugestão**. Como sugestão (o modo proposta), nada do que o agente escreve vai ao ar antes de alguém da equipe aprovar no painel, em **Sugestões dos agentes**. É o modo para começar com um agente novo.
+4. Copie o token, que começa com `dnxa_` e aparece uma vez só.
 
 | O agente vai                                                       | Escopo          |
 | ------------------------------------------------------------------ | --------------- |
@@ -57,7 +58,7 @@ Se o cliente aceita variáveis de ambiente no arquivo, use uma no lugar do token
 
 ## 3. Confira com `get_shop`
 
-A primeira chamada é sempre `get_shop`. Ela devolve a loja (nome, endereço da vitrine, moeda), a integração e os escopos do token. A lista de ferramentas mostra só as que esses escopos permitem. O cliente recebe essa lista quando se conecta: se o lojista marcar um escopo novo depois, o `get_shop` já mostra o escopo, mas a ferramenta só aparece depois de reconectar o servidor (no Claude Code, `/mcp`) ou de abrir outra conversa.
+A primeira chamada é sempre `get_shop`. Ela devolve a loja (nome, endereço da vitrine, moeda), a integração, os escopos do token e o modo de aprovação (`integration.approval_mode`: `direct` ou `proposal`). A lista de ferramentas mostra só as que esses escopos permitem. O cliente recebe essa lista quando se conecta: se o lojista marcar um escopo novo depois, o `get_shop` já mostra o escopo, mas a ferramenta só aparece depois de reconectar o servidor (no Claude Code, `/mcp`) ou de abrir outra conversa.
 
 ## Quando dá erro
 

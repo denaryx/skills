@@ -4,7 +4,7 @@ description: Escreve e organiza o conteúdo das páginas de categoria, das marca
 license: MIT
 metadata:
   author: denaryx
-  version: '0.2.2'
+  version: '0.3.0'
 ---
 
 # Categorias, marcas e páginas institucionais na Denaryx
@@ -47,6 +47,8 @@ Para criar uma página:
 1. Crie com `create_page`. Ela fica fora da vitrine.
 2. Mostre o texto ao usuário e espere o acordo.
 3. Ponha no ar com `update_page` e `"published": true`.
+
+Se a integração estiver em modo proposta (`approval_mode: "proposal"` em `get_shop`), a `create_page` e a `update_page` não mudam a loja: viram propostas, que o lojista aprova no painel. A página só nasce quando a proposta de criação é aprovada, e então a proposta de pôr no ar se faz com o id dela. Acompanhe com `list_proposals`.
 
 Cuidados:
 

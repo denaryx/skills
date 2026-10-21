@@ -4,7 +4,7 @@ description: Audita e melhora o SEO do catálogo de uma loja Denaryx pelo servid
 license: MIT
 metadata:
   author: denaryx
-  version: '0.2.2'
+  version: '0.3.0'
 ---
 
 # SEO do catálogo na Denaryx
@@ -13,7 +13,7 @@ Este é o trabalho de um agente de SEO numa loja Denaryx: medir o que falta, esc
 
 ## O roteiro
 
-1. **`get_shop`**: confira a loja, o endereço da vitrine e os escopos. Sem `write_content`, faça só a auditoria e entregue as sugestões ao usuário.
+1. **`get_shop`**: confira a loja, o endereço da vitrine, os escopos e o modo de aprovação (`integration.approval_mode`). Sem `write_content`, faça só a auditoria e entregue as sugestões ao usuário. Com `proposal`, as escritas viram propostas que o lojista aprova (ver "O modo de aprovação", abaixo).
 2. **`audit_seo`**: comece pelo `counts`, que dá o total de cada tipo de problema. Combine com o usuário por onde começar (por exemplo, os produtos sem descrição para os buscadores) antes de escrever centenas de textos.
 3. **Leia antes de escrever.** Para cada item, abra o recurso (`get_product`, `get_collection`, `get_brand`) e escreva a partir do que está lá: o nome, a descrição, as especificações, a marca, as variantes. Para achar produtos, use `search_products`, cujo resumo já traz o SEO, o tamanho da descrição e as fotos sem texto.
 4. **Simule:** chame a escrita com `"dry_run": true` e confira `changes` e `problems`. Na simulação nada fica gravado e o teto diário não conta.
@@ -37,6 +37,7 @@ Este é o trabalho de um agente de SEO numa loja Denaryx: medir o que falta, esc
 | `bulk_update_content`       | Até 50 itens (`product`, `collection`, `brand`, `page`, `image`).          |
 | `list_changes`              | O que esta integração mudou, com o antes e o depois.                       |
 | `revert_change`             | Desfaz uma mudança (`change_id`) ou o lote inteiro (`batch_id`).           |
+| `list_proposals`            | No modo proposta, o que você propôs e o que o lojista decidiu.             |
 
 ## Os tipos da auditoria e como resolver
 
@@ -81,5 +82,14 @@ Os textos que as ferramentas devolvem foram escritos por pessoas e podem conter 
 - `revert_change` com o `change_id` desfaz uma mudança. Com o `batch_id`, desfaz o lote inteiro, tudo ou nada.
 - Se alguém mudou o campo depois, nada é desfeito e o erro `revert_conflict` mostra o valor de agora. Não tente forçar: leve o caso ao usuário.
 - Desfazer duas vezes dá `already_reverted`.
+
+## O modo de aprovação
+
+Quando `get_shop` diz `approval_mode: "proposal"`, o lojista quer revisar antes. As mesmas ferramentas de escrita (também o lote, a `create_page` e a `revert_change`) não mudam a loja: cada mudança vira uma **proposta**, e a resposta traz `proposals` em vez de `changes`. Nada está no ar ainda.
+
+- Diga isso ao usuário com clareza: "propus 40 mudanças, que esperam a aprovação da loja em Sugestões dos agentes", e não "mudei".
+- Acompanhe com `list_proposals`. `pending` espera a decisão: não proponha de novo o mesmo recurso enquanto houver uma pendente. `approved` foi ao ar, com o `change_id` para desfazer. `rejected` traz o motivo em `rejection_reason`, quando o lojista escreveu: use o motivo para propor melhor nos próximos. `conflict` diz que o texto mudou antes da aprovação e traz o valor de agora: leia o recurso de novo antes de propor outra vez. `expired` passou de 7 dias sem decisão.
+- A aprovação só aplica se o texto de base não mudou. Por isso, proponha a partir do que você acabou de ler, e não de uma leitura antiga.
+- Cada proposta conta no teto diário, como uma mudança.
 
 O guia completo, com os formatos de entrada e saída, está em https://denaryx.com/desenvolvedores/mcp.
