@@ -4,7 +4,7 @@ description: Explica como uma loja Denaryx mede visitas e vendas e alimenta camp
 license: MIT
 metadata:
   author: denaryx
-  version: '0.2.1'
+  version: '0.2.2'
 ---
 
 # Medição e anúncios numa loja Denaryx
@@ -62,8 +62,9 @@ Com o escopo `read_reports`, a ferramenta `get_sales_report` soma as vendas de u
 - **O que conta:** o pedido pago e não cancelado, pela data do pagamento, nos dias de Brasília (`America/Sao_Paulo`). Se a conta de anúncios usa outro fuso, os dias não batem exatamente nas bordas: compare semanas ou meses.
 - **A receita** (`revenue`) é o valor dos produtos com os descontos e sem o frete, o mesmo valor da compra que a loja manda à Meta, ao TikTok e ao GA4, no mesmo momento (o pagamento aprovado). `revenue` dividido pelo que se gastou em todos os canais dá o retorno geral da loja.
 - **Atribuída e total não são a mesma coisa:** o relatório conta todas as vendas da loja, de qualquer canal; a ferramenta de anúncios conta só as que atribui à campanha. O total da loja costuma ser maior. O pedido cancelado depois sai do relatório, mas a conversão continua na ferramenta.
-- **Os campos:** `orders`, `items`, `revenue`, `average_order_value` (o ticket médio), `discount` (cupom e Pix) e `shipping` (o frete), todos em centavos. `totals` é o período inteiro.
-- **Por dia** (`group_by: "day"`): uma linha por dia, com zero nos dias sem venda. Até 92 dias por chamada.
+- **Os campos:** `orders`, `items`, `revenue`, `average_order_value` (o ticket médio), `discount` (cupom e Pix) e `shipping` (o frete), todos em centavos. `totals` é o período inteiro. Sem pedidos, o `average_order_value` vem `null`: não há ticket médio, então não o some como 0.
+- **Por dia** (`group_by: "day"`): só os dias com venda. O dia que não aparece teve zero, e os dias de antes da loja existir nem contam. Até 92 dias por chamada.
+- **O período vai até hoje:** o `to` no futuro é recusado. Para "este mês", use do dia 1 até hoje.
 - **Por produto ou por coleção** (`"product"`, `"collection"`): as que mais venderam em receita, 20 por padrão (até 50 com `limit`; `truncated: true` diz que há mais), num período de até 366 dias. Aqui a receita é a dos itens, antes do cupom e do desconto no Pix. A coleção soma as coleções de baixo dela, e o produto em duas coleções conta nas duas: as linhas não somam o total. Use para saber quais produtos e categorias anunciar, e os títulos e endereços deles com `search_products` e `list_collections` (essas pedem `read_content` ou `read_products`).
 - **Sem dado pessoal:** não peça `read_orders` ao lojista para ver os pedidos um a um. O servidor MCP não lê pedidos nem clientes, e as conversões por pessoa ficam nas ferramentas de anúncios, que já as recebem.
 
