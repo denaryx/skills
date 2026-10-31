@@ -4,7 +4,7 @@ description: Liga um agente de IA a uma loja da Denaryx pelo servidor MCP (https
 license: MIT
 metadata:
   author: denaryx
-  version: '0.3.0'
+  version: '0.4.0'
 ---
 
 # Conectar um agente à loja Denaryx
