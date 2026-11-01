@@ -4,7 +4,7 @@ description: Audita e melhora o SEO do catálogo de uma loja Denaryx pelo servid
 license: MIT
 metadata:
   author: denaryx
-  version: '0.4.0'
+  version: '0.5.0'
 ---
 
 # SEO do catálogo na Denaryx
@@ -22,23 +22,23 @@ Este é o trabalho de um agente de SEO numa loja Denaryx: medir o que falta, esc
 
 ## As ferramentas
 
-| Ferramenta                  | Para quê                                                                   |
-| --------------------------- | -------------------------------------------------------------------------- |
-| `audit_seo`                 | A lista do que falta, com `counts`. Filtros `type` e `resource_type`.      |
-| `search_products`           | Achar produtos por texto, coleção, marca ou situação, com o resumo de SEO. |
-| `get_product`               | O produto inteiro, com as fotos e o `alt` de cada uma.                     |
-| `list_collections`          | A árvore das categorias.                                                   |
-| `get_collection`            | Uma categoria com o texto da página e o SEO.                               |
-| `list_brands`               | As marcas.                                                                 |
-| `get_brand`                 | Uma marca com a descrição e o SEO.                                         |
-| `update_product_content`    | Título, `handle`, descrição, `seo` e o `alt` das fotos (`images`).         |
-| `update_collection_content` | Título, `handle`, texto da página (`description`) e `seo`.                 |
-| `update_brand_content`      | Nome, `handle`, descrição e `seo`.                                         |
-| `bulk_update_content`       | Até 50 itens (`product`, `collection`, `brand`, `page`, `image`).          |
-| `list_changes`              | O que esta integração mudou, com o antes e o depois.                       |
-| `revert_change`             | Desfaz uma mudança (`change_id`) ou o lote inteiro (`batch_id`).           |
-| `list_proposals`            | No modo proposta, o que você propôs e o que o lojista decidiu.             |
-| `get_search_report`         | O que os compradores buscaram na vitrine e não acharam.                    |
+| Ferramenta                  | Para quê                                                                                                                          |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `audit_seo`                 | A lista do que falta, com `counts`. Filtros `type` e `resource_type`.                                                             |
+| `search_products`           | Achar produtos por texto, coleção, marca, situação ou o que falta (`without_images`, `without_description`), com o resumo de SEO. |
+| `get_product`               | O produto inteiro, com as fotos e o `alt` de cada uma.                                                                            |
+| `list_collections`          | A árvore das categorias.                                                                                                          |
+| `get_collection`            | Uma categoria com o texto da página e o SEO.                                                                                      |
+| `list_brands`               | As marcas.                                                                                                                        |
+| `get_brand`                 | Uma marca com a descrição e o SEO.                                                                                                |
+| `update_product_content`    | Título, `handle`, descrição, `seo` e o `alt` das fotos (`images`).                                                                |
+| `update_collection_content` | Título, `handle`, texto da página (`description`) e `seo`.                                                                        |
+| `update_brand_content`      | Nome, `handle`, descrição e `seo`.                                                                                                |
+| `bulk_update_content`       | Até 50 itens (`product`, `collection`, `brand`, `page`, `image`).                                                                 |
+| `list_changes`              | O que esta integração mudou, com o antes e o depois.                                                                              |
+| `revert_change`             | Desfaz uma mudança (`change_id`) ou o lote inteiro (`batch_id`).                                                                  |
+| `list_proposals`            | No modo proposta, o que você propôs e o que o lojista decidiu.                                                                    |
+| `get_search_report`         | O que os compradores buscaram na vitrine e não acharam.                                                                           |
 
 ## Os tipos da auditoria e como resolver
 

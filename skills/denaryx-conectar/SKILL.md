@@ -4,7 +4,7 @@ description: Liga um agente de IA a uma loja da Denaryx pelo servidor MCP (https
 license: MIT
 metadata:
   author: denaryx
-  version: '0.4.0'
+  version: '0.5.0'
 ---
 
 # Conectar um agente à loja Denaryx
@@ -20,11 +20,12 @@ O token vem do painel da loja, e só o dono ou o gerente o criam. Peça ao usuá
 3. Escolha como as mudanças de texto chegam à loja: **direto** ou **como sugestão**. Como sugestão (o modo proposta), nada do que o agente escreve vai ao ar antes de alguém da equipe aprovar no painel, em **Sugestões dos agentes**. É o modo para começar com um agente novo.
 4. Copie o token, que começa com `dnxa_` e aparece uma vez só.
 
-| O agente vai                                                       | Escopo          |
-| ------------------------------------------------------------------ | --------------- |
-| Ler o catálogo e as páginas, e auditar o SEO                       | `read_content`  |
-| Também mudar títulos, descrições, SEO, endereços e textos de fotos | `write_content` |
-| Ler as vendas somadas por dia, produto ou categoria, para anúncios | `read_reports`  |
+| O agente vai                                                       | Escopo           |
+| ------------------------------------------------------------------ | ---------------- |
+| Ler o catálogo e as páginas, e auditar o SEO                       | `read_content`   |
+| Também mudar títulos, descrições, SEO, endereços e textos de fotos | `write_content`  |
+| Ler as vendas somadas por dia, produto ou categoria, para anúncios | `read_reports`   |
+| Reajustar preços em porcentagem (`adjust_prices`)                  | `write_products` |
 
 O `write_content` muda **só os textos**. Ele não mexe em preço, estoque, variantes, fotos, nem exclui nada. Não peça `write_products` para um trabalho de conteúdo.
 
@@ -72,6 +73,6 @@ A primeira chamada é sempre `get_shop`. Ela devolve a loja (nome, endereço da 
 
 ## O que o servidor não faz
 
-Nenhuma ferramenta lê pedidos um a um ou clientes, nem muda preço, estoque ou fotos, nem exclui nada, mesmo que o token tenha outros escopos: as vendas chegam só somadas (`read_reports`). Para o resto existe a API Admin REST (`https://api.denaryx.com/admin/2026-10`), que é para integrações de servidor como um ERP, e não para um agente de conteúdo ou de anúncios.
+Nenhuma ferramenta lê pedidos um a um ou clientes, nem muda estoque ou fotos, nem exclui nada, mesmo que o token tenha outros escopos: as vendas chegam só somadas (`read_reports`). O preço só muda em porcentagem, pelo `adjust_prices` (com `write_products`, no modo direto: o modo proposta só cobre textos), simulado antes com `dry_run`, no histórico com o preço de cada variante e desfeito com `revert_change`. Para o resto existe a API Admin REST (`https://api.denaryx.com/admin/2026-10`), que é para integrações de servidor como um ERP, e não para um agente de conteúdo ou de anúncios.
 
 O guia completo do servidor está em https://denaryx.com/desenvolvedores/mcp.

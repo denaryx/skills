@@ -4,7 +4,7 @@ description: Explica como uma loja Denaryx mede visitas e vendas e alimenta camp
 license: MIT
 metadata:
   author: denaryx
-  version: '0.4.0'
+  version: '0.5.0'
 ---
 
 # Medição e anúncios numa loja Denaryx
